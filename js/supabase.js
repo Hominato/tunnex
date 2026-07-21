@@ -2,7 +2,7 @@
 
 // Replace these placeholders with your actual Supabase project credentials
 const SUPABASE_CONFIG = {
-  url: 'YOUR_SUPABASE_URL',
+  url: 'https://mhrmeioajptosgjiqjaz.supabase.co',
   anonKey: 'YOUR_SUPABASE_ANON_KEY'
 };
 
