@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Compressive Savings Bank of Texas Digital</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    { const t = localStorage.getItem("theme"); if (t === 'dark' || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute('data-theme','dark'); else if (t === 'light') document.documentElement.setAttribute('data-theme','light'); }
+  </script>
+  <style>
+    .settings-card { padding:28px 32px; margin-bottom:24px; }
+    .settings-row { display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid var(--border-color); }
+    .settings-row:last-child { border-bottom:none; }
+    .settings-label h4 { font-size:0.95rem; color:var(--text-primary); margin-bottom:3px; }
+    .settings-label p { font-size:0.8rem; color:var(--text-muted); }
+    .section-heading { font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin-bottom:16px; font-weight:600; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div id="sidebar-target"></div>
+    <main class="main-content">
+      <div id="topbar-target" data-title="Settings" data-subtitle="Manage your application preferences"></div>
+
+      <!-- Appearance -->
+      <div class="glass settings-card">
+        <p class="section-heading"><i class="fas fa-palette"></i> Appearance</p>
+        <div class="settings-row">
+          <div class="settings-label">
+            <h4>Dark Mode</h4>
+            <p>Toggle between light and dark interface themes</p>
+          </div>
+          <label class="switch"><input type="checkbox" id="dark-mode-toggle"><span class="slider"></span></label>
+        </div>
+        <div class="settings-row">
+          <div class="settings-label">
+            <h4>Use System Preference</h4>
+            <p>Automatically match your operating system's theme</p>
+          </div>
+          <label class="switch"><input type="checkbox" id="system-theme-toggle"><span class="slider"></span></label>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="glass settings-card">
+        <p class="section-heading"><i class="fas fa-lock"></i> Security</p>
+        <div class="settings-row">
+          <div class="settings-label">
+            <h4>Session Timeout</h4>
+            <p>Auto-logout after period of inactivity</p>
+          </div>
+          <div class="select-wrapper" style="width:160px;">
+            <select id="timeout-select" class="form-select" style="padding:8px 12px;">
+              <option value="5">5 minutes</option>
+              <option value="15" selected>15 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="60">60 minutes</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:20px;">
+          <h4 style="font-size:0.95rem; color:var(--text-primary); margin-bottom:16px;">Change Password</h4>
+          <form id="change-password-form" novalidate style="display:grid; gap:16px; max-width:480px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <div class="input-container">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="current-password" class="form-input input-with-icon" placeholder="Current password" required autocomplete="current-password">
+                <button type="button" class="password-toggle-btn"><i class="far fa-eye"></i></button>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <ul class="rules-list">
+                <li>At least 8 characters, 1 uppercase, 1 number, 1 special symbol</li>
+              </ul>
+              <div class="input-container">
+                <i class="fas fa-key"></i>
+                <input type="password" id="new-password" class="form-input input-with-icon" placeholder="New password"
+                  required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" minlength="8" autocomplete="new-password">
+                <button type="button" class="password-toggle-btn"><i class="far fa-eye"></i></button>
+                <span class="error-msg">Password doesn't meet requirements.</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <div class="input-container">
+                <i class="fas fa-key"></i>
+                <input type="password" id="confirm-new-password" class="form-input input-with-icon" placeholder="Confirm new password" required autocomplete="new-password">
+                <button type="button" class="password-toggle-btn"><i class="far fa-eye"></i></button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:fit-content;"><i class="fas fa-key"></i> Update Password</button>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- Data Management -->
+      <div class="glass settings-card">
+        <p class="section-heading"><i class="fas fa-database"></i> Data Management</p>
+        <div class="settings-row">
+          <div class="settings-label">
+            <h4>Backup Database</h4>
+            <p>Download all localStorage data as a JSON file</p>
+          </div>
+          <button class="btn btn-secondary" id="backup-btn"><i class="fas fa-download"></i> Backup</button>
+        </div>
+        <div class="settings-row">
+          <div class="settings-label">
+            <h4>Restore Database</h4>
+            <p>Import a previously backed-up JSON file</p>
+          </div>
+          <label class="btn btn-secondary" style="cursor:pointer;">
+            <i class="fas fa-upload"></i> Restore
+            <input type="file" id="restore-input" accept=".json" style="display:none;">
+          </label>
+        </div>
+        <div class="settings-row">
+          <div class="settings-label">
+            <h4>Clear Notifications</h4>
+            <p>Remove all notification history from your account</p>
+          </div>
+          <button class="btn btn-outline" id="clear-notif-btn"><i class="fas fa-bell-slash"></i> Clear</button>
+        </div>
+        <div class="settings-row">
+          <div class="settings-label">
+            <h4 style="color:var(--error-color);">Sign Out</h4>
+            <p>End your current banking session</p>
+          </div>
+          <button class="btn btn-danger" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+      </div>
+
+      <!-- Sandbox Notice -->
+      <div class="glass settings-card" style="border:1px solid var(--warning-color); background:var(--warning-light);">
+        <p style="font-size:0.85rem; color:var(--warning-color);"><i class="fas fa-exclamation-triangle"></i> <strong>Sandbox Notice:</strong> This is a frontend-only demo. No real banking operations, real funds, or real security are involved. Do not store actual personal credentials.</p>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/email.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compressive Savings Bank of Texas - Modern Digital Banking</title>
+  
+  <!-- SEO Tags -->
+  <meta name="description" content="Experience premium digital banking with Compressive Savings Bank of Texas. Send money instantly, track spending analytics, and secure your vaults with glassmorphic dashboards.">
+  
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Style sheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- Prevent Theme Flash (FOUC) -->
+  <meta name="color-scheme" content="light dark">
+  <script>
+    {
+      const colorScheme = localStorage.getItem("theme");
+      if (colorScheme === 'dark' || (!colorScheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else if (colorScheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Sticky Landing Navigation -->
+  <nav class="landing-nav">
+    <div class="logo">
+      <img src="assets/logo.png" alt="Logo" style="width: 32px; height: 32px; flex-shrink: 0; display: inline-block; vertical-align: middle; margin-right: 8px; object-fit: contain;">
+      <span>Compressive Savings Bank of Texas</span>
+    </div>
+    <div class="landing-nav-links no-print">
+      <a href="#features" class="landing-nav-link">Features</a>
+      <a href="#stats" class="landing-nav-link">Statistics</a>
+      <a href="#testimonials" class="landing-nav-link">Reviews</a>
+      <a href="#faq" class="landing-nav-link">FAQ</a>
+      <a href="#contact" class="landing-nav-link">Contact</a>
+    </div>
+    <div class="landing-nav-actions no-print">
+      <a href="login.html" class="btn btn-outline">Log In</a>
+      <a href="register.html" class="btn btn-primary">Open Account</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fas fa-sparkles"></i> Welcome to the Future of Fintech</span>
+      <h1 class="hero-title">Banking <br>without the <br><span class="gradient-text">complexity.</span></h1>
+      <p class="hero-desc">Send money peer-to-peer instantly, monitor monthly savings with interactive charts, and back up files securely. Sign up today for a $100,000 credit.</p>
+      <div class="hero-buttons no-print">
+        <a href="register.html" class="btn btn-primary btn-lg"><i class="fas fa-arrow-right"></i> Claim $100,000 Now</a>
+        <a href="#features" class="btn btn-secondary btn-lg">Learn More</a>
+      </div>
+    </div>
+    
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hero-credit-card card-primary">
+          <div class="card-header-logo">
+            <i class="fas fa-wifi"></i>
+            <span>Compressive Savings Bank of Texas</span>
+          </div>
+          <div class="card-chip"></div>
+          <div class="card-number">•••• •••• •••• 9275</div>
+          <div class="card-holder">
+            <div>Jane Smith</div>
+            <div>07/29</div>
+          </div>
+        </div>
+        <div class="hero-credit-card card-secondary">
+          <div class="card-header-logo">
+            <i class="fas fa-wifi"></i>
+            <span>Compressive Savings Bank of Texas</span>
+          </div>
+          <div class="card-chip"></div>
+          <div class="card-number">•••• •••• •••• 2859</div>
+          <div class="card-holder">
+            <div>Mike Johnson</div>
+            <div>09/29</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Features Section -->
+  <section id="features" class="section">
+    <div class="section-header">
+      <h2>Banking designed for your lifestyle</h2>
+      <p>Manage, save, and analyze your finances in one premium environment.</p>
+    </div>
+    
+    <div class="features-grid">
+      
+      <!-- Feature 1 -->
+      <div class="feature-card glass glass-interactive">
+        <div class="feature-icon flex-center"><i class="fas fa-bolt"></i></div>
+        <h3>Instant Transfers</h3>
+        <p>Transfer funds between registered users instantly. Every transfer triggers immediate notification badges and sandbox email alerts.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card glass glass-interactive">
+        <div class="feature-icon flex-center"><i class="fas fa-chart-line"></i></div>
+        <h3>Interactive Analytics</h3>
+        <p>Monitor your weekly expenditure, monthly income distributions, and general wealth trends using dynamic Chart.js breakdowns.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card glass glass-interactive">
+        <div class="feature-icon flex-center"><i class="fas fa-shield-alt"></i></div>
+        <h3>Sandbox Database</h3>
+        <p>Take charge of your banking ledger. Back up all records as a local JSON file or import backups directly inside Settings.</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Live Statistics Section -->
+  <section id="stats" class="section stats-section">
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-number count-number" data-target="24380">0</div>
+        <div class="stat-label">Active Terminals</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number count-number count-currency" data-target="124500000">$0</div>
+        <div class="stat-label">Transactions Processed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number count-number" data-target="999">0</div>
+        <div class="stat-label">Uptime Percentage</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Reviews -->
+  <section id="testimonials" class="section">
+    <div class="section-header">
+      <h2>Loved by smart savers</h2>
+      <p>Read opinions of developers testing out our frontend sandbox environment.</p>
+    </div>
+    
+    <div class="testimonials-grid">
+      <!-- Card 1 -->
+      <div class="testimonial-card glass">
+        <div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">"The dashboard analytics represent budget items beautifully! The local backups saved all mock transactions perfectly."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-author-info">
+            <h4>Tobi Adebayo</h4>
+            <p>Software Engineer</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="testimonial-card glass">
+        <div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <p class="testimonial-text">"Super clean Glassmorphic UX. Transferred mock funds from User A to User B, and both screens updated notifications synchronously!"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-author-info">
+            <h4>Chidi Okafor</h4>
+            <p>UI Specialist</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="testimonial-card glass">
+        <div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">"Creating a statement generated a beautiful styled invoice ready for print. Very responsive layout on mobile."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-author-info">
+            <h4>Halima Yusuf</h4>
+            <p>Fintech Analyst</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion Accordions -->
+  <section id="faq" class="section">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Find answers to critical operations about the banking sandbox dashboard.</p>
+    </div>
+    
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary class="faq-summary">Is this a real banking system?</summary>
+        <div class="faq-content">
+          No. This is a frontend-only MVP (Minimum Viable Product) powered entirely in the browser using <code>localStorage</code>. It does not communicate with any banking server or hold real-world financial records.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">How does the mock email system function?</summary>
+        <div class="faq-content">
+          Whenever a transfer, deposit, or login occurs, our SMTP Simulator generates a mock email object and pushes it to your database. You can read these emails inside the Email Center navigation panel.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">Will my balance persist if I reload the page?</summary>
+        <div class="faq-content">
+          Yes! All users, settings, and logs are saved in your browser's local storage database, which persists until you clear your browser cache or select "Purge Database" inside Settings.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact-section">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p>Have questions about integrating our UI system, or looking to deploy this code template? Write to our developer desk.</p>
+        <div class="contact-details-list">
+          <div class="contact-details-item">
+            <div class="contact-details-icon flex-center"><i class="fas fa-envelope"></i></div>
+            <div>
+              <strong style="display:block; color:var(--text-primary);">Email Desk</strong>
+              <span>support@commbank-demo.au</span>
+            </div>
+          </div>
+          <div class="contact-details-item">
+            <div class="contact-details-icon flex-center"><i class="fas fa-phone"></i></div>
+            <div>
+              <strong style="display:block; color:var(--text-primary);">Phone Sandbox</strong>
+              <span>+234 (0) 800-SANDBOX</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form-panel glass">
+        <form id="contact-form" style="padding:40px;" novalidate>
+          <div class="form-group">
+            <label for="contact-name" class="form-label">Your Name</label>
+            <input type="text" id="contact-name" class="form-input" required minlength="2">
+            <span class="error-msg">Name is too short.</span>
+          </div>
+          <div class="form-group">
+            <label for="contact-email" class="form-label">Email Address</label>
+            <input type="email" id="contact-email" class="form-input" required>
+            <span class="error-msg">Email is invalid.</span>
+          </div>
+          <div class="form-group">
+            <label for="contact-msg" class="form-label">Message</label>
+            <textarea id="contact-msg" class="form-input" rows="4" required style="resize:none;"></textarea>
+            <span class="error-msg">Message cannot be empty.</span>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <strong style="color:var(--text-primary); font-size:1.1rem; display:block; margin-bottom:4px;">Compressive Savings Bank of Texas.</strong>
+        <span style="font-size:0.8rem; color:var(--text-muted);">Frontend-only fintech layout template.</span>
+      </div>
+      <div class="footer-links no-print">
+        <a href="#features">Features</a>
+        <a href="#stats">Stats</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DB & scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/email.js"></script>
+  <script>
+    // Scroll header tracker
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.landing-nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Animate stats numbers when they enter the viewport
+    const countItems = document.querySelectorAll('.count-number');
+    const options = { threshold: 0.5 };
+    
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseFloat(el.getAttribute('data-target'));
+          Utils.animateCounter(el, 0, target, 1500);
+          observer.unobserve(el);
+        }
+      });
+    }, options);
+
+    countItems.forEach(el => observer.observe(el));
+
+    // Simple Form Validation hook
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target;
+      if (form.checkValidity()) {
+        Utils.showToast("Message Sent", "Thank you! Your simulated message has been processed.", "success");
+        form.reset();
+      } else {
+        Utils.showToast("Form Invalid", "Please check contact form inputs.", "warning");
+        // Trigger visual validation
+        Array.from(form.elements).forEach(el => {
+          if (el.checkValidity) {
+            el.classList.add('user-invalid-fallback');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

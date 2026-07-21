@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Center - Compressive Savings Bank of Texas Digital</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    { const t = localStorage.getItem("theme"); if (t === 'dark' || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute('data-theme','dark'); else if (t === 'light') document.documentElement.setAttribute('data-theme','light'); }
+  </script>
+  <style>
+    .email-list-item { display:flex; gap:16px; padding:18px 24px; border-bottom:1px solid var(--border-color); cursor:pointer; transition:background var(--transition-fast); align-items:flex-start; }
+    .email-list-item:hover { background:rgba(0,0,0,0.01); }
+    [data-theme="dark"] .email-list-item:hover { background:rgba(255,255,255,0.01); }
+    .email-icon { width:40px; height:40px; border-radius:50%; background:var(--primary-light); color:var(--primary-color); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .email-meta { flex:1; min-width:0; }
+    .email-subject { font-weight:600; color:var(--text-primary); font-size:0.9rem; margin-bottom:4px; }
+    .email-preview { font-size:0.8rem; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .email-date { font-size:0.75rem; color:var(--text-muted); flex-shrink:0; }
+
+    /* Email detail panel */
+    .email-detail { padding:30px; display:none; }
+    .email-detail.active { display:block; }
+    .email-body-content { white-space:pre-wrap; font-size:0.9rem; line-height:1.8; color:var(--text-secondary); background:rgba(0,0,0,0.015); padding:20px; border-radius:var(--radius-sm); margin-top:16px; font-family:monospace; }
+    [data-theme="dark"] .email-body-content { background:rgba(255,255,255,0.02); }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div id="sidebar-target"></div>
+    <main class="main-content">
+      <div id="topbar-target" data-title="Email Center" data-subtitle="Simulated SMTP delivery log — no real emails sent"></div>
+
+      <div style="display:grid; grid-template-columns:1fr 1.4fr; gap:24px; align-items:start;">
+
+        <!-- Left: Email List -->
+        <div class="glass" style="padding:0; overflow:hidden;">
+          <div style="padding:20px 24px; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div class="select-wrapper" style="min-width:180px;">
+              <select id="email-view-filter" class="form-select" style="padding:6px 12px; font-size:0.85rem;">
+                <option value="my-inbox">My Inbox</option>
+                <option value="all-logs">All Sandbox Logs</option>
+              </select>
+            </div>
+            <span id="email-count" class="badge badge-info">0 messages</span>
+          </div>
+          <div id="email-list-container">
+            <!-- JS injected -->
+          </div>
+          <div id="email-empty" class="empty-state hidden">
+            <div class="empty-state-icon"><i class="far fa-envelope-open"></i></div>
+            <h3>No emails yet</h3>
+            <p>Make a transfer or register a new user to generate mock emails.</p>
+          </div>
+        </div>
+
+        <!-- Right: Email Detail -->
+        <div class="glass" style="padding:0; overflow:hidden; min-height:400px;">
+          <div id="email-placeholder" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:400px; gap:16px;">
+            <i class="far fa-envelope" style="font-size:3rem; color:var(--text-muted);"></i>
+            <p style="color:var(--text-muted);">Select an email to read</p>
+          </div>
+          <div id="email-detail-panel" class="email-detail">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px;">
+              <div>
+                <h3 id="detail-subject" style="font-size:1.1rem; margin-bottom:6px;">Subject</h3>
+                <p id="detail-to" style="font-size:0.8rem; color:var(--text-muted);"></p>
+                <p id="detail-date" style="font-size:0.8rem; color:var(--text-muted);"></p>
+              </div>
+              <span id="detail-status" class="badge"><i class="fas fa-info-circle"></i> Status</span>
+            </div>
+            <div id="detail-body" class="email-body-content"></div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/email.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/email-center.js"></script>
+</body>
+</html>

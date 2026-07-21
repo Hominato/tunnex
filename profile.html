@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Compressive Savings Bank of Texas Digital</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    { const t = localStorage.getItem("theme"); if (t === 'dark' || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.setAttribute('data-theme','dark'); else if (t === 'light') document.documentElement.setAttribute('data-theme','light'); }
+  </script>
+  <style>
+    .avatar-grid { display:grid; grid-template-columns: repeat(5, 1fr); gap:12px; margin:16px 0; }
+    .avatar-option { width:56px; height:56px; border-radius:50%; cursor:pointer; border:3px solid transparent; transition:all var(--transition-fast); overflow:hidden; }
+    .avatar-option:hover, .avatar-option.selected { border-color:var(--primary-color); box-shadow:0 0 0 4px var(--primary-light); }
+    .profile-info-row { display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border-color); font-size:0.9rem; }
+    .profile-info-row:last-child { border-bottom:none; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div id="sidebar-target"></div>
+    <main class="main-content">
+      <div id="topbar-target" data-title="My Profile" data-subtitle="Manage your personal account information"></div>
+
+      <div style="display:grid; grid-template-columns:1fr 1.5fr; gap:30px; align-items:start;">
+
+        <!-- Left: Avatar & Account Info -->
+        <div>
+          <div class="glass" style="padding:32px; text-align:center; margin-bottom:24px;">
+            <div id="profile-avatar-display" style="width:100px; height:100px; border-radius:50%; margin:0 auto 16px; border:3px solid var(--primary-color); overflow:hidden;"></div>
+            <h2 id="profile-name" style="font-size:1.3rem; margin-bottom:4px;">Loading...</h2>
+            <p id="profile-username" style="color:var(--text-muted); font-size:0.85rem;">@username</p>
+            <p class="badge badge-success" style="margin:12px auto; display:inline-flex;"><i class="fas fa-shield-alt"></i> Verified Account</p>
+          </div>
+
+          <div class="glass" style="padding:24px;">
+            <h3 style="font-size:1rem; margin-bottom:16px; color:var(--text-muted); text-transform:uppercase; font-size:0.75rem; letter-spacing:1px;">Account Details</h3>
+            <div class="profile-info-row">
+              <span style="color:var(--text-muted);">Account No.</span>
+              <strong id="info-account" style="color:var(--text-primary); font-family:monospace;">—</strong>
+            </div>
+            <div class="profile-info-row">
+              <span style="color:var(--text-muted);">Customer ID</span>
+              <strong id="info-customer" style="color:var(--text-primary);">—</strong>
+            </div>
+            <div class="profile-info-row">
+              <span style="color:var(--text-muted);">Email</span>
+              <strong id="info-email" style="color:var(--text-primary); word-break:break-all;">—</strong>
+            </div>
+            <div class="profile-info-row">
+              <span style="color:var(--text-muted);">Joined</span>
+              <strong id="info-joined" style="color:var(--text-primary);">—</strong>
+            </div>
+            <div class="profile-info-row">
+              <span style="color:var(--text-muted);">Balance</span>
+              <strong id="info-balance" style="color:var(--success-color);">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Edit Form -->
+        <div class="glass" style="padding:36px;">
+          <h3 style="margin-bottom:24px; font-size:1.2rem;">Edit Profile</h3>
+
+          <!-- Avatar picker -->
+          <div class="form-group">
+            <label class="form-label">Choose Avatar</label>
+            <div class="avatar-grid" id="avatar-grid"></div>
+            <label class="btn btn-outline" style="cursor:pointer; margin-top:8px; display:inline-flex; gap:8px;">
+              <i class="fas fa-upload"></i> Upload Photo
+              <input type="file" id="avatar-upload" accept="image/*" style="display:none;">
+            </label>
+          </div>
+
+          <form id="profile-form" novalidate>
+            <div class="form-group">
+              <label for="edit-name" class="form-label">Full Name</label>
+              <div class="input-container">
+                <i class="far fa-user"></i>
+                <input type="text" id="edit-name" class="form-input input-with-icon" required minlength="3">
+                <span class="error-msg">Name must be at least 3 characters.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="edit-phone" class="form-label">Phone Number</label>
+              <div class="input-container">
+                <i class="fas fa-phone"></i>
+                <input type="tel" id="edit-phone" class="form-input input-with-icon" pattern="^[0-9+ \-]{8,15}$">
+                <span class="error-msg">Enter a valid phone number.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="edit-address" class="form-label">Address</label>
+              <input type="text" id="edit-address" class="form-input" placeholder="e.g. 12 George St, Sydney">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%; padding:14px;"><i class="fas fa-save"></i> Save Changes</button>
+          </form>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/email.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

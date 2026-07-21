@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Compressive Savings Bank of Texas Digital</title>
+
+  <!-- SEO Tags -->
+  <meta name="description"
+    content="Sign in to your Compressive Savings Bank of Texas Digital terminal to view balance, transfer funds, check statements, and edit settings.">
+
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Style sheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Prevent Theme Flash (FOUC) -->
+  <meta name="color-scheme" content="light dark">
+  <script>
+    {
+      const colorScheme = localStorage.getItem("theme");
+      if (colorScheme === 'dark' || (!colorScheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else if (colorScheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="auth-container">
+
+    <!-- Left Banner -->
+    <div class="auth-banner">
+      <div class="auth-banner-header">
+        <img src="assets/logo.png" alt="Logo" style="width: 32px; height: 32px; flex-shrink: 0; display: inline-block; vertical-align: middle; margin-right: 8px; object-fit: contain;">
+        <span>Compressive Savings Bank of Texas</span>
+      </div>
+
+      <div class="auth-banner-body">
+        <h1 class="auth-banner-title">Welcome back to digital banking.</h1>
+        <p class="auth-banner-text">Sign in to access your dashboard, initialize instant peer transfers, generate
+          statement reports, and manage settings.</p>
+      </div>
+
+      <div class="auth-banner-footer">
+        <span>© 2026 Compressive Savings Bank of Texas Frontend MVP. Sandbox Simulation.</span>
+      </div>
+    </div>
+
+    <!-- Right Panel Forms -->
+    <div class="auth-panel">
+      <div class="auth-card glass">
+        <div class="auth-header">
+          <div class="mobile-logo">
+            <img src="assets/logo.png" alt="Logo" style="width: 48px; height: 48px; object-fit: contain;">
+            <span style="font-size: 1.3rem; font-weight: 700; color: var(--text-primary);">Compressive Savings</span>
+          </div>
+          <h2 class="auth-title">Sign in to terminal</h2>
+          <p class="auth-subtitle">Use your username or email</p>
+        </div>
+
+        <form id="login-form" novalidate>
+
+          <!-- Username / Email -->
+          <div class="form-group">
+            <label for="username" class="form-label">Username or Email</label>
+            <div class="input-container">
+              <i class="far fa-user"></i>
+              <input type="text" id="username" class="form-input input-with-icon" placeholder="Username or Email"
+                required autocomplete="username">
+              <span class="error-msg">Please enter your username or email address.</span>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-container">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="password" class="form-input input-with-icon" placeholder="••••••••" required
+                autocomplete="current-password">
+              <button type="button" class="password-toggle-btn" aria-label="Toggle password visibility">
+                <i class="far fa-eye"></i>
+              </button>
+              <span class="error-msg">Please enter your password.</span>
+            </div>
+          </div>
+
+          <div class="checkbox-group" style="justify-content: space-between; margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <input type="checkbox" id="rememberMe">
+              <label for="rememberMe" class="checkbox-label">Remember me</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Sign In
+          </button>
+
+        </form>
+
+        <p class="auth-footer-link">
+          New to Compressive Savings Bank of Texas?
+          <a href="register.html">Register here</a>
+        </p>
+
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="index.html" style="font-size: 0.85rem; color: var(--text-muted);"><i class="fas fa-arrow-left"></i>
+            Back to Landing Page</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DB scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/email.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>

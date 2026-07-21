@@ -1,0 +1,111 @@
+/* Dashboard Custom Elements Styling */
+
+.account-card {
+  padding: 36px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.05) 100%), var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .account-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(30, 27, 75, 0.4) 100%), var(--bg-card);
+}
+
+.account-card::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+  opacity: 0.12;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.account-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Blur effect when balance is hidden */
+.balance-hidden {
+  filter: blur(8px);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Quick Action Hover cards */
+.quick-action-card {
+  transition: all var(--transition-fast);
+}
+
+.quick-action-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.quick-action-card:hover .feature-icon {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Table styling for transactions ledger */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr {
+  transition: background var(--transition-fast);
+}
+
+tbody tr:hover {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+[data-theme="dark"] tbody tr:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+th, td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+}
+
+td {
+  color: var(--text-secondary);
+}
+
+th {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Text amount styles */
+.amount-plus {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.amount-minus {
+  color: var(--error-color);
+  font-weight: 600;
+}
+
+/* Charts card visuals */
+.chart-card {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card canvas {
+  margin-top: auto;
+}
