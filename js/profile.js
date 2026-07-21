@@ -26,6 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.querySelector('i').className = input.type === 'password' ? 'far fa-eye' : 'far fa-eye-slash';
     });
   });
+
+  // Dynamically refresh profile details once Supabase load finishes in background
+  document.addEventListener('supabase-sync-complete', () => {
+    const updatedUser = DB.getCurrentUser();
+    if (updatedUser) {
+      populateReadOnlyInfo(updatedUser);
+      prefillForm(updatedUser);
+    }
+  });
 });
 
 function populateReadOnlyInfo(user) {
@@ -140,8 +149,7 @@ async function saveProfile(user) {
   selectedAvatarFile = null;
 
   // Update display
-  document.getElementById('profile-name').innerText = user.fullName;
-  document.getElementById('profile-username').innerText = `@${user.username}`;
+  populateReadOnlyInfo(user);
 
   // Dynamically refresh sidebar avatar if present on the screen
   const sidebarAvatar = document.getElementById('sidebar-avatar');
