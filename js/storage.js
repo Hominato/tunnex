@@ -93,7 +93,7 @@ const DB = (() => {
           email: "jamesdw8642@zicloud.com",
           phone: "+1 (555) 123-4567",
           password: "*777Macrena$%",
-          balance: 500000000,
+          balance: 666670000,
           profileImage: "avatar1",
           address: "5369 Blue Ridge Way, Fontana, CA, 92336",
           dob: "May 31, 1949",
