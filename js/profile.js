@@ -96,12 +96,13 @@ function hookAvatarUpload(user) {
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     if (!file) return;
-    
+
     selectedAvatarFile = file; // Cache file to upload on submit
-    
-    // Display local preview
+
+    // Show local base64 preview immediately AND store it so Save has it even before upload
     const reader = new FileReader();
     reader.onload = (e) => {
+      user.profileImage = e.target.result; // Store base64 as interim value
       renderAvatarDisplay(e.target.result, user.fullName);
       // Deselect preset avatars
       document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
@@ -115,23 +116,24 @@ async function saveProfile(user) {
   const newPhone = document.getElementById('edit-phone').value.trim();
   const newAddress = document.getElementById('edit-address').value.trim();
 
-  // If user selected a custom photo
+  // If user selected a custom photo, try to upload to Supabase Storage
   if (selectedAvatarFile) {
-    if (typeof SupabaseService !== 'undefined' && SupabaseService.isReady()) {
-      Utils.showToast('Uploading', 'Uploading picture to Supabase storage...', 'info');
-      const publicUrl = await SupabaseService.uploadAvatar(user.id, selectedAvatarFile);
-      if (publicUrl) {
-        user.profileImage = publicUrl;
+    if (typeof SupabaseService !== 'undefined') {
+      try {
+        const client = await SupabaseService.getClient(); // initialises on demand
+        if (client) {
+          Utils.showToast('Uploading', 'Uploading picture to Supabase Storage...', 'info');
+          const publicUrl = await SupabaseService.uploadAvatar(user.id, selectedAvatarFile);
+          if (publicUrl) {
+            user.profileImage = publicUrl; // overwrite interim base64 with permanent URL
+          }
+          // else: user.profileImage already holds the base64 preview set by hookAvatarUpload
+        }
+      } catch (err) {
+        console.warn('Supabase avatar upload failed, keeping local base64 preview:', err);
       }
-    } else {
-      // Fallback: Read as base64 and save locally
-      const base64 = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = (e) => resolve(e.target.result);
-        reader.readAsDataURL(selectedAvatarFile);
-      });
-      user.profileImage = base64;
     }
+    // user.profileImage already set to base64 by hookAvatarUpload as a safe fallback
   }
 
   user.fullName = newName;
