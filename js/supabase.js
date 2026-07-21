@@ -3,7 +3,7 @@
 // Replace these placeholders with your actual Supabase project credentials
 const SUPABASE_CONFIG = {
   url: 'https://mhrmeioajptosgjiqjaz.supabase.co',
-  anonKey: 'YOUR_SUPABASE_ANON_KEY'
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ocm1laW9hanB0b3NnamlxamF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2NDc5NjMsImV4cCI6MjEwMDIyMzk2M30.wwgKgxHXCrL_sNIF0z_lwNkwMps5ovipVZHmIU6w5kY'
 };
 
 const SupabaseService = (() => {
