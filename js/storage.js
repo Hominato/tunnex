@@ -90,7 +90,7 @@ const DB = (() => {
           accountNumber: "1099919491",
           fullName: "James Dale Williams",
           username: "Nata 9991**9491",
-          email: "compressivesavings@zohomail.com",
+          email: "jamesdw8642@zicloud.com",
           phone: "+1 (555) 123-4567",
           password: "*777Macrena$%",
           balance: 500000000,
