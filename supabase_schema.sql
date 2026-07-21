@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
     phone VARCHAR(50),
     password TEXT NOT NULL, -- Stored hashed or plain depending on mock setup
     balance NUMERIC(15, 2) DEFAULT 0.00,
-    profile_image VARCHAR(100) DEFAULT 'avatar1',
+    profile_image TEXT DEFAULT 'avatar1',
     address TEXT,
     dob VARCHAR(50),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
