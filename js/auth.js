@@ -38,25 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmInput = document.getElementById('confirmPassword');
     
     // Custom profile image upload during registration
-    let uploadedAvatarBase64 = null;
+    let selectedRegFile = null;
     const regAvatarInput = document.getElementById('reg-avatar');
     if (regAvatarInput) {
       regAvatarInput.addEventListener('change', () => {
-        const file = regAvatarInput.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            uploadedAvatarBase64 = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        } else {
-          uploadedAvatarBase64 = null;
-        }
+        selectedRegFile = regAvatarInput.files[0] || null;
       });
     }
 
     // Custom inline validations
-    registerForm.addEventListener('submit', (e) => {
+    registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const fullName = document.getElementById('fullName').value.trim();
@@ -91,6 +82,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const customerId = "CUS" + Math.floor(100000 + Math.random() * 900000); // CUS + 6 digits
       const userId = Utils.genId('USR');
 
+      // Upload profile image if present
+      let profileImageUrl = "avatar" + (Math.floor(Math.random() * 5) + 1); // Default random avatar
+      if (selectedRegFile) {
+        if (typeof SupabaseService !== 'undefined' && SupabaseService.isReady()) {
+          Utils.showToast("Uploading", "Uploading picture to Supabase storage...", "info");
+          const publicUrl = await SupabaseService.uploadAvatar(userId, selectedRegFile);
+          if (publicUrl) {
+            profileImageUrl = publicUrl;
+          }
+        } else {
+          // Local fallback to Base64
+          profileImageUrl = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (ev) => resolve(ev.target.result);
+            reader.readAsDataURL(selectedRegFile);
+          });
+        }
+      }
+
       const newUser = {
         id: userId,
         customerId: customerId,
@@ -101,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         phone: phone,
         password: password, // MVP Hashing mock
         balance: 100000,
-        profileImage: uploadedAvatarBase64 || ("avatar" + (Math.floor(Math.random() * 5) + 1)), // Use uploaded photo or assign random default
+        profileImage: profileImageUrl,
         address: "",
         createdAt: new Date().toISOString()
       };

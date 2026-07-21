@@ -142,7 +142,42 @@ const SupabaseService = (() => {
       } catch (e) {
         console.error(`Pull fail:`, e);
       }
-      return null;
+    },
+
+    // Upload an avatar image file to Supabase Storage bucket
+    uploadAvatar: async (userId, file) => {
+      try {
+        const client = await SupabaseService.getClient();
+        if (!client) return null;
+
+        // Create a unique file name
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${userId}-${Date.now()}.${fileExt}`;
+        const filePath = `profile-pictures/${fileName}`;
+
+        // Upload to the public 'avatars' bucket
+        const { data, error } = await client.storage
+          .from('avatars')
+          .upload(filePath, file, {
+            cacheControl: '3600',
+            upsert: true
+          });
+
+        if (error) {
+          console.error("Supabase storage upload error:", error);
+          return null;
+        }
+
+        // Get public URL of the uploaded asset
+        const { data: urlData } = client.storage
+          .from('avatars')
+          .getPublicUrl(filePath);
+
+        return urlData?.publicUrl || null;
+      } catch (e) {
+        console.error("Supabase avatar upload failed:", e);
+        return null;
+      }
     }
   };
 })();

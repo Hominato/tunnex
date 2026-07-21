@@ -2,6 +2,7 @@
 
 const AVATARS = ['avatar1', 'avatar2', 'avatar3', 'avatar4', 'avatar5'];
 const AVATAR_COLORS = { avatar1: '#4f46e5', avatar2: '#10b981', avatar3: '#f59e0b', avatar4: '#ef4444', avatar5: '#3b82f6' };
+let selectedAvatarFile = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   const user = DB.getCurrentUser();
@@ -12,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   prefillForm(user);
   hookAvatarUpload(user);
 
-  document.getElementById('profile-form').addEventListener('submit', (e) => {
+  document.getElementById('profile-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    saveProfile(user);
+    await saveProfile(user);
   });
 
   // Password toggle buttons
@@ -44,7 +45,7 @@ function renderAvatarDisplay(avatarId, fullName) {
   const display = document.getElementById('profile-avatar-display');
   const initials = fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
 
-  if (avatarId && avatarId.startsWith('data:image')) {
+  if (avatarId && (avatarId.startsWith('data:image') || avatarId.startsWith('http://') || avatarId.startsWith('https://'))) {
     display.innerHTML = `<img src="${avatarId}" style="width:100%; height:100%; object-fit:cover;">`;
   } else {
     const color = AVATAR_COLORS[avatarId] || '#4f46e5';
@@ -66,6 +67,7 @@ function buildAvatarGrid(user) {
     div.addEventListener('click', () => {
       grid.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
       div.classList.add('selected');
+      selectedAvatarFile = null; // Clear custom uploaded file when choosing a preset
       user.profileImage = id;
       renderAvatarDisplay(id, user.fullName);
     });
@@ -85,9 +87,12 @@ function hookAvatarUpload(user) {
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     if (!file) return;
+    
+    selectedAvatarFile = file; // Cache file to upload on submit
+    
+    // Display local preview
     const reader = new FileReader();
     reader.onload = (e) => {
-      user.profileImage = e.target.result; // Base64 data URL
       renderAvatarDisplay(e.target.result, user.fullName);
       // Deselect preset avatars
       document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
@@ -96,10 +101,29 @@ function hookAvatarUpload(user) {
   });
 }
 
-function saveProfile(user) {
+async function saveProfile(user) {
   const newName = document.getElementById('edit-name').value.trim();
   const newPhone = document.getElementById('edit-phone').value.trim();
   const newAddress = document.getElementById('edit-address').value.trim();
+
+  // If user selected a custom photo
+  if (selectedAvatarFile) {
+    if (typeof SupabaseService !== 'undefined' && SupabaseService.isReady()) {
+      Utils.showToast('Uploading', 'Uploading picture to Supabase storage...', 'info');
+      const publicUrl = await SupabaseService.uploadAvatar(user.id, selectedAvatarFile);
+      if (publicUrl) {
+        user.profileImage = publicUrl;
+      }
+    } else {
+      // Fallback: Read as base64 and save locally
+      const base64 = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(selectedAvatarFile);
+      });
+      user.profileImage = base64;
+    }
+  }
 
   user.fullName = newName;
   user.phone = newPhone;
@@ -111,6 +135,9 @@ function saveProfile(user) {
   if (idx !== -1) users[idx] = user;
   DB.saveUsers(users);
   DB.setCurrentUser(user);
+
+  // Clear cache variable after successful save
+  selectedAvatarFile = null;
 
   // Update display
   document.getElementById('profile-name').innerText = user.fullName;

@@ -194,8 +194,8 @@ function getAvatarMarkup(avatarId, fullName) {
     avatar5: `<svg viewBox="0 0 100 100" style="width:100%; height:100%;"><circle cx="50" cy="50" r="45" fill="#3b82f6"/><text x="50" y="55" font-family="Poppins" font-size="28" font-weight="700" fill="white" text-anchor="middle" alignment-baseline="middle">${initials}</text></svg>`,
   };
 
-  // Base64 upload custom photo checks
-  if (avatarId && avatarId.startsWith('data:image')) {
+  // Base64 upload or remote Storage URL custom photo checks
+  if (avatarId && (avatarId.startsWith('data:image') || avatarId.startsWith('http://') || avatarId.startsWith('https://'))) {
     return `<img src="${avatarId}" alt="User Avatar" style="width:100%; height:100%; object-fit:cover;">`;
   }
 
