@@ -462,6 +462,74 @@ const DB = (() => {
     if (!get(KEYS.THEME)) {
       set(KEYS.THEME, 'system');
     }
+
+    // Load Supabase script & start background pull/sync
+    loadScript('js/supabase.js').then(async () => {
+      if (typeof SupabaseService !== 'undefined') {
+        const client = await SupabaseService.getClient();
+        if (client) {
+          console.log("Supabase linked. Syncing database tables...");
+          await pullSupabaseData();
+        }
+      }
+    });
+  };
+
+  // Helper to load Supabase config script in context
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      if (document.querySelector(`script[src="${src}"]`)) {
+        resolve();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = () => resolve();
+      script.onerror = () => resolve();
+      document.head.appendChild(script);
+    });
+  };
+
+  // Fetch Supabase updates and cache to localStorage
+  const pullSupabaseData = async () => {
+    try {
+      const users = await SupabaseService.pullTable('users');
+      if (users && users.length > 0) {
+        set(KEYS.USERS, users);
+        // Sync active user context
+        const cur = get(KEYS.CURRENT_USER);
+        if (cur) {
+          const match = users.find(u => u.id === cur.id);
+          if (match) set(KEYS.CURRENT_USER, match);
+        }
+      }
+
+      const txs = await SupabaseService.pullTable('transactions');
+      if (txs) set(KEYS.TRANSACTIONS, txs);
+
+      const notes = await SupabaseService.pullTable('notifications');
+      if (notes) set(KEYS.NOTIFICATIONS, notes);
+
+      const emails = await SupabaseService.pullTable('emails');
+      if (emails) set(KEYS.EMAILS, emails);
+
+      const currentUsr = get(KEYS.CURRENT_USER);
+      if (currentUsr) {
+        const dbSettingsList = await SupabaseService.pullTable('settings');
+        if (dbSettingsList) {
+          const userSettings = dbSettingsList.find(s => s.userId === currentUsr.id);
+          if (userSettings) {
+            const localSettings = get(KEYS.SETTINGS) || {};
+            set(KEYS.SETTINGS, { ...localSettings, ...userSettings });
+          }
+        }
+      }
+
+      // Notify page listeners to refresh their contents
+      document.dispatchEvent(new CustomEvent('supabase-sync-complete'));
+    } catch (e) {
+      console.error("Supabase initial pull failed:", e);
+    }
   };
 
   // Run initial setup immediately
@@ -470,25 +538,66 @@ const DB = (() => {
   return {
     KEYS,
     getUsers: () => get(KEYS.USERS) || [],
-    saveUsers: (users) => set(KEYS.USERS, users),
+    saveUsers: (users) => {
+      set(KEYS.USERS, users);
+      if (typeof SupabaseService !== 'undefined' && SupabaseService.isReady()) {
+        SupabaseService.syncTable('users', users);
+      }
+    },
 
     getCurrentUser: () => get(KEYS.CURRENT_USER),
-    setCurrentUser: (user) => set(KEYS.CURRENT_USER, user),
+    setCurrentUser: (user) => {
+      set(KEYS.CURRENT_USER, user);
+      // Synchronize the single user record's fields to Supabase as well
+      if (typeof SupabaseService !== 'undefined' && SupabaseService.isReady() && user) {
+        SupabaseService.syncTable('users', [user]);
+      }
+    },
     clearCurrentUser: () => localStorage.removeItem(KEYS.CURRENT_USER),
 
     getTransactions: () => get(KEYS.TRANSACTIONS) || [],
-    saveTransactions: (txs) => set(KEYS.TRANSACTIONS, txs),
+    saveTransactions: (txs) => {
+      set(KEYS.TRANSACTIONS, txs);
+      if (typeof SupabaseService !== 'undefined' && SupabaseService.isReady()) {
+        SupabaseService.syncTable('transactions', txs);
+      }
+    },
 
     getNotifications: () => get(KEYS.NOTIFICATIONS) || [],
-    saveNotifications: (notes) => set(KEYS.NOTIFICATIONS, notes),
+    saveNotifications: (notes) => {
+      set(KEYS.NOTIFICATIONS, notes);
+      if (typeof SupabaseService !== 'undefined' && SupabaseService.isReady()) {
+        SupabaseService.syncTable('notifications', notes);
+      }
+    },
 
     getTheme: () => get(KEYS.THEME, 'system'),
     saveTheme: (theme) => set(KEYS.THEME, theme),
 
     getSettings: () => get(KEYS.SETTINGS) || {},
-    saveSettings: (settings) => set(KEYS.SETTINGS, settings),
+    saveSettings: (settings) => {
+      set(KEYS.SETTINGS, settings);
+      const user = get(KEYS.CURRENT_USER);
+      if (user && typeof SupabaseService !== 'undefined' && SupabaseService.isReady()) {
+        SupabaseService.syncTable('settings', [{
+          userId: user.id,
+          sessionTimeoutMinutes: settings.sessionTimeoutMinutes,
+          showBalance: settings.showBalance,
+          emailAlerts: settings.emailAlerts,
+          emailDeliveryMode: settings.emailDeliveryMode,
+          emailjsPublicKey: settings.emailjsPublicKey,
+          emailjsServiceId: settings.emailjsServiceId,
+          emailjsTemplateId: settings.emailjsTemplateId
+        }]);
+      }
+    },
 
     getEmails: () => get(KEYS.EMAILS) || [],
-    saveEmails: (emails) => set(KEYS.EMAILS, emails)
+    saveEmails: (emails) => {
+      set(KEYS.EMAILS, emails);
+      if (typeof SupabaseService !== 'undefined' && SupabaseService.isReady()) {
+        SupabaseService.syncTable('emails', emails);
+      }
+    }
   };
 })();

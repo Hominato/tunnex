@@ -20,6 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('search-input')?.addEventListener('input', () => { currentPage = 1; loadHistory(); });
   document.getElementById('type-filter')?.addEventListener('change', () => { currentPage = 1; loadHistory(); });
   document.getElementById('sort-select')?.addEventListener('change', () => { currentPage = 1; loadHistory(); });
+
+  // Dynamically refresh transaction history once Supabase loads updates
+  document.addEventListener('supabase-sync-complete', () => {
+    loadHistory();
+  });
 });
 
 function loadHistory() {

@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderNotifications(user);
     Utils.showToast('Cleared', 'All notifications have been removed.', 'info');
   });
+
+  // Dynamically redraw notification items once Supabase completes sync
+  document.addEventListener('supabase-sync-complete', () => {
+    renderNotifications(user);
+  });
 });
 
 function renderNotifications(user) {

@@ -56,6 +56,32 @@ document.addEventListener('DOMContentLoaded', () => {
     Utils.showToast('Settings Saved', `Session timeout set to ${timeoutSelect.value} minutes.`, 'success');
   });
 
+  // Supabase Connection Form
+  const supabaseForm = document.getElementById('supabase-connect-form');
+  const supabaseUrlInput = document.getElementById('supabase-url');
+  const supabaseKeyInput = document.getElementById('supabase-key');
+  
+  if (supabaseForm) {
+    supabaseUrlInput.value = settings.supabaseUrl || '';
+    supabaseKeyInput.value = settings.supabaseKey || '';
+    
+    supabaseForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const url = supabaseUrlInput.value.trim();
+      const key = supabaseKeyInput.value.trim();
+      
+      settings.supabaseUrl = url;
+      settings.supabaseKey = key;
+      
+      DB.saveSettings(settings);
+      
+      Utils.showToast('Supabase Saved', 'Credentials updated. Redrawing database session...', 'success');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1200);
+    });
+  }
+
 
 
   // 2. Password toggle buttons
