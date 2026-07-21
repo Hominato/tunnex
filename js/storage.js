@@ -31,7 +31,7 @@ const DB = (() => {
   };
 
   // Initialize DB and Seed Demo Data
-  const SEED_VERSION = 'v11'; // bump this whenever seed data changes
+  const SEED_VERSION = 'v12'; // bump this whenever seed data changes
   const init = () => {
     // Wipe stale data if seed version has changed
     if (get('seedVersion') !== SEED_VERSION) {
@@ -97,7 +97,7 @@ const DB = (() => {
           profileImage: "avatar1",
           address: "5369 Blue Ridge Way, Fontana, CA, 92336",
           dob: "May 31, 1949",
-          createdAt: new Date("2021-03-21T13:00:00Z").toISOString()
+          createdAt: new Date("2015-01-15T09:00:00Z").toISOString()
         }
       ];
       set(KEYS.USERS, demoUsers);
@@ -166,9 +166,141 @@ const DB = (() => {
           senderName: "Compressive Savings Bank of Texas Reserve",
           receiverAccountNumber: "1099919491",
           receiverName: "James Dale Williams",
-          amount: 500000000,
-          description: "Initial Balance Deposit",
-          date: new Date("2021-03-21T13:00:00Z").toISOString()
+          amount: 10000000,
+          description: "Initial Capital Deposit",
+          date: new Date("2015-01-15T09:15:00Z").toISOString()
+        },
+        {
+          id: "TXN100000007",
+          type: "withdraw",
+          senderAccountNumber: "1099919491",
+          senderName: "James Dale Williams",
+          receiverAccountNumber: "SYSTEM",
+          receiverName: "Cash Withdrawal",
+          amount: 50000,
+          description: "Property Investment Setup",
+          date: new Date("2016-04-12T11:00:00Z").toISOString()
+        },
+        {
+          id: "TXN100000008",
+          type: "transfer",
+          senderAccountNumber: "1099919491",
+          senderName: "James Dale Williams",
+          receiverAccountNumber: "1083759275",
+          receiverName: "Jane Smith",
+          amount: 120000,
+          description: "Consulting Fees",
+          date: new Date("2017-08-22T14:20:00Z").toISOString()
+        },
+        {
+          id: "TXN100000009",
+          type: "deposit",
+          senderAccountNumber: "SYSTEM",
+          senderName: "Business Equity Inc",
+          receiverAccountNumber: "1099919491",
+          receiverName: "James Dale Williams",
+          amount: 45000000,
+          description: "Equity Buyout Proceeds",
+          date: new Date("2018-11-05T10:30:00Z").toISOString()
+        },
+        {
+          id: "TXN100000010",
+          type: "withdraw",
+          senderAccountNumber: "1099919491",
+          senderName: "James Dale Williams",
+          receiverAccountNumber: "SYSTEM",
+          receiverName: "Cash Withdrawal",
+          amount: 250000,
+          description: "Luxury Vehicle Acquisition",
+          date: new Date("2019-03-19T16:45:00Z").toISOString()
+        },
+        {
+          id: "TXN100000011",
+          type: "transfer",
+          senderAccountNumber: "1099919491",
+          senderName: "James Dale Williams",
+          receiverAccountNumber: "1098472859",
+          receiverName: "Mike Johnson",
+          amount: 5000,
+          description: "Family Gift Transfer",
+          date: new Date("2020-07-14T09:00:00Z").toISOString()
+        },
+        {
+          id: "TXN100000012",
+          type: "deposit",
+          senderAccountNumber: "SYSTEM",
+          senderName: "Global Wealth Mutual",
+          receiverAccountNumber: "1099919491",
+          receiverName: "James Dale Williams",
+          amount: 150000000,
+          description: "Capital Gains payout",
+          date: new Date("2021-09-30T13:00:00Z").toISOString()
+        },
+        {
+          id: "TXN100000013",
+          type: "transfer",
+          senderAccountNumber: "1099919491",
+          senderName: "James Dale Williams",
+          receiverAccountNumber: "1073648291",
+          receiverName: "John & Aileen Karpathakis",
+          amount: 50000,
+          description: "Private Holiday Booking Share",
+          date: new Date("2022-12-25T12:00:00Z").toISOString()
+        },
+        {
+          id: "TXN100000014",
+          type: "withdraw",
+          senderAccountNumber: "1099919491",
+          senderName: "James Dale Williams",
+          receiverAccountNumber: "SYSTEM",
+          receiverName: "ATM Withdrawal",
+          amount: 1000000,
+          description: "Asset Procurement",
+          date: new Date("2023-05-18T10:15:00Z").toISOString()
+        },
+        {
+          id: "TXN100000015",
+          type: "deposit",
+          senderAccountNumber: "SYSTEM",
+          senderName: "Inheritance Trust",
+          receiverAccountNumber: "1099919491",
+          receiverName: "James Dale Williams",
+          amount: 300000000,
+          description: "Trust Fund Inheritance Release",
+          date: new Date("2024-02-10T11:00:00Z").toISOString()
+        },
+        {
+          id: "TXN100000016",
+          type: "transfer",
+          senderAccountNumber: "1099919491",
+          senderName: "James Dale Williams",
+          receiverAccountNumber: "1073648291",
+          receiverName: "John & Aileen Karpathakis",
+          amount: 1500000,
+          description: "Investment Partnership Contribution",
+          date: new Date("2025-06-30T14:00:00Z").toISOString()
+        },
+        {
+          id: "TXN100000017",
+          type: "withdraw",
+          senderAccountNumber: "1099919491",
+          senderName: "James Dale Williams",
+          receiverAccountNumber: "SYSTEM",
+          receiverName: "Cash Out",
+          amount: 500000,
+          description: "Offshore Vault Relocation",
+          date: new Date("2026-01-10T15:30:00Z").toISOString()
+        },
+        {
+          id: "TXN100000018",
+          type: "deposit",
+          senderAccountNumber: "SYSTEM",
+          senderName: "US Treasury",
+          receiverAccountNumber: "1099919491",
+          receiverName: "James Dale Williams",
+          amount: 164155000,
+          description: "Treasury Bonds Maturation Payment",
+          date: new Date("2026-07-20T10:00:00Z").toISOString()
         }
       ];
       set(KEYS.TRANSACTIONS, demoTransactions);

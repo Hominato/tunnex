@@ -116,5 +116,11 @@ function saveProfile(user) {
   document.getElementById('profile-name').innerText = user.fullName;
   document.getElementById('profile-username').innerText = `@${user.username}`;
 
+  // Dynamically refresh sidebar avatar if present on the screen
+  const sidebarAvatar = document.getElementById('sidebar-avatar');
+  if (sidebarAvatar && typeof getAvatarMarkup === 'function') {
+    sidebarAvatar.innerHTML = getAvatarMarkup(user.profileImage, user.fullName);
+  }
+
   Utils.showToast('Profile Saved', 'Your account details have been updated.', 'success');
 }

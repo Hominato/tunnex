@@ -77,7 +77,7 @@ VALUES
 ('USR001', 'CUS839472', '1083759275', 'Jane Smith', 'janesmith', 'jane@gmail.com', '+61 403 123 456', 'Password123!', 170000.00, 'avatar1', '12 George Street, Sydney NSW 2000', NULL, '2026-06-01 10:00:00+00'),
 ('USR002', 'CUS194827', '1098472859', 'Mike Johnson', 'mikejohnson', 'mike@gmail.com', '+61 412 987 654', 'Password123!', 80000.00, 'avatar2', '45 Collins Street, Melbourne VIC 3000', NULL, '2026-06-15 14:30:00+00'),
 ('USR003', 'CUS572048', '1073648291', 'John & Aileen Karpathakis', 'jakarpathakis', 'jakarpathakis223@gmail.com', '+447512813601', 'Angel562!', 218911815.00, 'avatar3', '88 Pitt Street, Brisbane QLD 4000', NULL, '2025-04-01 09:00:00+00'),
-('USR004', 'CUS194905', '1099919491', 'James Dale Williams', 'Nata 9991**9491', 'jamesdw8642@zicloud.com', '+1 (555) 123-4567', '*777Macrena$%', 666670000.00, 'avatar1', '5369 Blue Ridge Way, Fontana, CA, 92336', 'May 31, 1949', '2021-03-21 13:00:00+00')
+('USR004', 'CUS194905', '1099919491', 'James Dale Williams', 'Nata 9991**9491', 'jamesdw8642@zicloud.com', '+1 (555) 123-4567', '*777Macrena$%', 666670000.00, 'avatar1', '5369 Blue Ridge Way, Fontana, CA, 92336', 'May 31, 1949', '2015-01-15 09:00:00+00')
 ON CONFLICT DO NOTHING;
 
 -- Seed Transactions
@@ -88,7 +88,19 @@ VALUES
 ('TXN100000003', 'transfer', '1098472859', 'Mike Johnson', '1083759275', 'Jane Smith', 20000.00, 'Split dinner bill', '2026-07-01 20:15:00+00'),
 ('TXN100000004', 'deposit', 'SYSTEM', 'NDLOVU SECURITY COMPANY', '1073648291', 'John & Aileen Karpathakis', 178900000.00, 'Security Services Contract Payment', '2026-06-15 12:00:00+00'),
 ('TXN100000005', 'deposit', 'SYSTEM', 'Compressive Savings Bank of Texas Reserve', '1073648291', 'John & Aileen Karpathakis', 11815.00, ' Balance Seed', '2026-05-01 09:00:00+00'),
-('TXN100000006', 'deposit', 'SYSTEM', 'Compressive Savings Bank of Texas Reserve', '1099919491', 'James Dale Williams', 500000000.00, 'Initial Balance Deposit', '2021-03-21 13:00:00+00')
+('TXN100000006', 'deposit', 'SYSTEM', 'Compressive Savings Bank of Texas Reserve', '1099919491', 'James Dale Williams', 10000000.00, 'Initial Capital Deposit', '2015-01-15 09:15:00+00'),
+('TXN100000007', 'withdrawal', '1099919491', 'James Dale Williams', 'SYSTEM', 'Cash Withdrawal', 50000.00, 'Property Investment Setup', '2016-04-12 11:00:00+00'),
+('TXN100000008', 'transfer', '1099919491', 'James Dale Williams', '1083759275', 'Jane Smith', 120000.00, 'Consulting Fees', '2017-08-22 14:20:00+00'),
+('TXN100000009', 'deposit', 'SYSTEM', 'Business Equity Inc', '1099919491', 'James Dale Williams', 45000000.00, 'Equity Buyout Proceeds', '2018-11-05 10:30:00+00'),
+('TXN100000010', 'withdrawal', '1099919491', 'James Dale Williams', 'SYSTEM', 'Cash Withdrawal', 250000.00, 'Luxury Vehicle Acquisition', '2019-03-19 16:45:00+00'),
+('TXN100000011', 'transfer', '1099919491', 'James Dale Williams', '1098472859', 'Mike Johnson', 5000.00, 'Family Gift Transfer', '2020-07-14 09:00:00+00'),
+('TXN100000012', 'deposit', 'SYSTEM', 'Global Wealth Mutual', '1099919491', 'James Dale Williams', 150000000.00, 'Capital Gains payout', '2021-09-30 13:00:00+00'),
+('TXN100000013', 'transfer', '1099919491', 'James Dale Williams', '1073648291', 'John & Aileen Karpathakis', 50000.00, 'Private Holiday Booking Share', '2022-12-25 12:00:00+00'),
+('TXN100000014', 'withdrawal', '1099919491', 'James Dale Williams', 'SYSTEM', 'ATM Withdrawal', 1000000.00, 'Asset Procurement', '2023-05-18 10:15:00+00'),
+('TXN100000015', 'deposit', 'SYSTEM', 'Inheritance Trust', '1099919491', 'James Dale Williams', 300000000.00, 'Trust Fund Inheritance Release', '2024-02-10 11:00:00+00'),
+('TXN100000016', 'transfer', '1099919491', 'James Dale Williams', '1073648291', 'John & Aileen Karpathakis', 1500000.00, 'Investment Partnership Contribution', '2025-06-30 14:00:00+00'),
+('TXN100000017', 'withdrawal', '1099919491', 'James Dale Williams', 'SYSTEM', 'Cash Out', 500000.00, 'Offshore Vault Relocation', '2026-01-10 15:30:00+00'),
+('TXN100000018', 'deposit', 'SYSTEM', 'US Treasury', '1099919491', 'James Dale Williams', 164155000.00, 'Treasury Bonds Maturation Payment', '2026-07-20 10:00:00+00')
 ON CONFLICT DO NOTHING;
 
 -- Seed Notifications

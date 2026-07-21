@@ -37,6 +37,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('password');
     const confirmInput = document.getElementById('confirmPassword');
     
+    // Custom profile image upload during registration
+    let uploadedAvatarBase64 = null;
+    const regAvatarInput = document.getElementById('reg-avatar');
+    if (regAvatarInput) {
+      regAvatarInput.addEventListener('change', () => {
+        const file = regAvatarInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            uploadedAvatarBase64 = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        } else {
+          uploadedAvatarBase64 = null;
+        }
+      });
+    }
+
     // Custom inline validations
     registerForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -83,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         phone: phone,
         password: password, // MVP Hashing mock
         balance: 100000,
-        profileImage: "avatar" + (Math.floor(Math.random() * 5) + 1), // Assign random default avatar
+        profileImage: uploadedAvatarBase64 || ("avatar" + (Math.floor(Math.random() * 5) + 1)), // Use uploaded photo or assign random default
         address: "",
         createdAt: new Date().toISOString()
       };
