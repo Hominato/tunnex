@@ -1,5 +1,90 @@
 /* Responsive Grid and Mobile Layout Adjustments */
 
+/* Media Queries & Responsive Adjustments */
+
+/* Tablet & Mobile navigation for Landing Page (index.html) */
+@media (max-width: 1024px) {
+  .landing-nav {
+    padding: 0 24px !important;
+  }
+
+  .hero-section {
+    grid-template-columns: 1fr !important;
+    padding: 120px 24px 60px !important;
+    text-align: center;
+    gap: 40px !important;
+  }
+
+  .hero-content {
+    align-items: center !important;
+  }
+
+  .hero-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section {
+    padding: 60px 24px !important;
+  }
+
+  .features-grid,
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Landing Nav links hide or adjust on mobile */
+  .landing-nav-links {
+    display: none !important;
+  }
+
+  .landing-nav .logo span {
+    font-size: 1rem;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .landing-nav {
+    padding: 0 16px !important;
+    height: 70px !important;
+  }
+
+  .hero-title {
+    font-size: 2.5rem !important;
+  }
+
+  .features-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .contact-form-panel form {
+    padding: 24px !important;
+  }
+
+  /* Account balance card responsiveness for Dashboard */
+  .account-card-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .account-balance-group h2 {
+    font-size: 2rem !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+}
+
 /* Desktop & Large screens (Default Sidebar expanded) */
 @media (min-width: 1025px) {
   .hamburger-btn {
@@ -124,6 +209,85 @@
 
 /* Mobile Devices (480px and down) */
 @media (max-width: 480px) {
+  .hero-section {
+    padding: 100px 16px 40px !important;
+  }
+
+  .hero-title {
+    font-size: 2rem !important;
+  }
+
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+  }
+
+  .hero-card-stack {
+    width: 280px !important;
+    height: 180px !important;
+  }
+
+  .card-number {
+    font-size: 1rem !important;
+    margin-top: 16px !important;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .stats-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .footer-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Auth screens responsive logo fix */
+  .auth-container {
+    grid-template-columns: 1fr !important;
+  }
+  .auth-banner {
+    display: none !important;
+  }
+  .auth-panel {
+    padding: 20px 12px !important;
+  }
+  .auth-card {
+    padding: 24px 16px !important;
+  }
+  .mobile-logo {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  /* Dashboard Balance perfect fit on tiny screens */
+  .account-balance-group h2 {
+    font-size: 1.6rem !important;
+    letter-spacing: -0.5px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
   .stats-grid {
     grid-template-columns: 1fr !important;
   }
@@ -158,30 +322,7 @@
     font-size: 2.2rem !important;
   }
 
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-    gap: 12px;
-  }
-
-  .hero-buttons .btn {
-    width: 100%;
-  }
-
   .features-grid {
     grid-template-columns: 1fr !important;
-  }
-
-  .stats-row {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  /* Auth split screens */
-  .auth-container {
-    grid-template-columns: 1fr !important;
-  }
-  .auth-banner {
-    display: none !important;
   }
 }
